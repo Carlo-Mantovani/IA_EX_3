@@ -7,7 +7,7 @@
  */
 public class AppPerceptron {
     public static void main(String args[]) {
-        Perceptron rede = new Perceptron();
+        Perceptron rede = new Perceptron();//rede de bom/mau pagador com 2 neuronios
 
          //rede.treinamento();
          //rede.generalizacaoComTestes();
