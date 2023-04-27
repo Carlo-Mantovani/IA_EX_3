@@ -1,7 +1,7 @@
 
 //Exemplo - Rede Perceptron com apenas 1 neuronio
 import static java.lang.Math.*;
-import java.util.Scanner;
+
 
 public class PerceptronMultipleLetters {
     private NeuronioLetras neuronio;
@@ -10,7 +10,7 @@ public class PerceptronMultipleLetters {
     private double x2[] = { 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0 }; // 2a entrada T
     private double x3[] = { 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1 }; // 3a entrada O
     private double x4[] = { 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1 }; // 4a entrada U
-    private double d[] = { 0, 1, 2, 3 }; // saida desejada. C = 0, T = 1, O = 2, U = 3
+    private double d[] = { 0, 1, 2, 3 }; // saida. C = 0, T = 1, O = 2, U = 3
     
 
     public PerceptronMultipleLetters() {
@@ -38,7 +38,8 @@ public class PerceptronMultipleLetters {
             System.out.println("Epoca: " + epocas);
             for (i = 0; i < 4; i++) {
                 // propagação
-                switch (i){
+
+                switch (i){// calculo conforme a entrada
                     case 0:
                     y1 = neuronio.calculaY(x1);
                     y2 = neuronio2.calculaY(x1);
@@ -65,7 +66,7 @@ public class PerceptronMultipleLetters {
                 erro2 = 0;
 
                 
-                switch ((int)(d[i])){
+                switch ((int)(d[i])){// calculo conforme a saida
 
                     case 0:
                         erro1 = -y1;
@@ -75,6 +76,7 @@ public class PerceptronMultipleLetters {
                     case 1:
                         erro1 = -y1;
                         erro2 = 1 - y2;
+                        break;
 
                     case 2:
                         erro1 = 1-y1;
@@ -90,7 +92,7 @@ public class PerceptronMultipleLetters {
 
                 }
 
-                if (erro1 != 0) {
+                if (erro1 != 0) {// ajuste dos pesos
 
                     switch (i){
 
@@ -114,7 +116,7 @@ public class PerceptronMultipleLetters {
                     }
                     
                 }
-                if (erro2 != 0) {
+                if (erro2 != 0) {// ajuste dos pesos
 
 
                     switch (i){
@@ -141,7 +143,7 @@ public class PerceptronMultipleLetters {
                 erroGeral += abs(erro1) + abs(erro2);
 
             }
-            if (erroGeral == 0 || epocas == 1000) {
+            if (erroGeral == 0 || epocas == 100000) {
                 break;
             }
 
@@ -163,7 +165,7 @@ public class PerceptronMultipleLetters {
         // Conjunto de Teste: Cliente
 
          
-
+        // Teste C
         System.out.println("Saida desejada (C): 0 em Neuronio A e 0 em Neuronio B");
         double saidaR = neuronio.calculaY(c);
         System.out.println("Saida Gerada pelo neuronio A para C: " + saidaR);
@@ -177,6 +179,7 @@ public class PerceptronMultipleLetters {
         }else{erros++;}
 
 
+        // Teste T
         System.out.println("Saida desejada (T): 0 em Neuronio A e 1 em Neuronio B " );
         saidaR = neuronio.calculaY(t);
         System.out.println("Saida Gerada pelo neuronio A para T: " + saidaR);
@@ -190,6 +193,7 @@ public class PerceptronMultipleLetters {
             acertos++;
         }else{erros++;}
 
+        // Teste O
         System.out.println("Saida desejada (O): 1 em Neuronio A e 0 em Neuronio B");
         saidaR = neuronio.calculaY(o);
         System.out.println("Saida Gerada pelo neuronio A para O: " + saidaR);
@@ -204,6 +208,7 @@ public class PerceptronMultipleLetters {
         }else{erros++;}
 
 
+        // Teste U
         System.out.println("Saida desejada (U): 1 em Neuronio A e 1 em Neuronio B");
         saidaR = neuronio.calculaY(u);
         System.out.println("Saida Gerada pelo neuronio A para U: " + saidaR);

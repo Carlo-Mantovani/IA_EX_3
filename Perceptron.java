@@ -105,7 +105,7 @@ public class Perceptron {
         x2[20] = 250;
         d[20] = 1;
 
-        for (int i = 0; i < 21; i++) {
+        for (int i = 0; i < 21; i++) {// normalizando os dados de entrada
             if (x1[i] > maior1) {
                 maior1 = x1[i];
             }
@@ -139,10 +139,10 @@ public class Perceptron {
                 erro1 = 0;
                 erro2 = 0;
 
-                if (d[i] == 0) {
+                if (d[i] == 0) {// se a saída desejada for 0 (ruim)
                     erro1 = 1 - y1;
                     erro2 = -y2;
-                } else {
+                } else {// se a saída desejada for 1 (bom)
                     erro1 = -y1;
                     erro2 = 1 - y2;
                 }
@@ -154,7 +154,7 @@ public class Perceptron {
                     neuronio.setW2(neuronio.getW2() + eta * erro1 * x2[i]);
                 }
                 // ajuste dos pesos
-                System.out.println("Erro1: " + erro1 + " Erro2: " + erro2 + "");
+                
                 if (erro2 != 0) {
                     neuronio2.setW0(neuronio2.getW0() + eta * erro2);
                     neuronio2.setW1(neuronio2.getW1() + eta * erro2 * x1[i]);
@@ -191,10 +191,11 @@ public class Perceptron {
             // propagação
             System.out.println("Saida Gerada pela rede: " + neuronio.calculaY(entrada1, entrada2));
         }
+        dados.close();
 
     }
 
-    public void generalizacaoComTestes() {
+    public void generalizacaoComTestes() {// uso da rede testando com os dados de teste
 
         int cont = 15;
         System.out.println("\n--- GENERALIZACAO");
@@ -203,13 +204,13 @@ public class Perceptron {
         // Conjunto de Teste: Cliente
         while (cont < 21) {
             double saidaD = d[cont];
-            System.out.println("Saida desejada: " + saidaD);
+            System.out.println("Saida desejada (responde 1 o neuronio associado a categoria da saida): " + saidaD);
             double saidaR = neuronio.calculaY(x1[cont], x2[cont]);
-            System.out.println("Saida Gerada pela rede treinada para categoria RUIM (0): " + saidaR);
+            System.out.println("Saida Gerada pelo neuronio treinado para categoria RUIM (0): " + saidaR);
             double saidaR2 = neuronio2.calculaY(x1[cont], x2[cont]);
-            System.out.println("Saida Gerada pela rede treinada para categoria BOM (1) : " + saidaR2);
+            System.out.println("Saida Gerada pelo neuronio treinado para categoria BOM (1) : " + saidaR2);
             cont++;
-            if (saidaD == saidaR || saidaD == saidaR2) {
+            if (saidaD == saidaR || saidaD == saidaR2) {// se a saida desejada for igual a saida gerada
                 acertos++;
             } else {
                 erros++;

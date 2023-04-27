@@ -30,7 +30,7 @@ public class NeuronioLetras {
         return 0;
     }
 
-    public void setWeights(double erro, double[] x, double eta){
+    public void setWeights(double erro, double[] x, double eta){// atualiza os pesos
         setW0(getW0() + eta * erro);
         setW1(getW1() + eta * erro * x[0]);
         setW2(getW2() + eta * erro * x[1]);
